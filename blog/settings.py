@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-$kei7l(xfs!qcj4o6ew*1-13q-0eool04fsfdsaniyt6k5f9gd'
+SECRET_KEY = 'django-insecure-$kei7l(xfs!qcj4o6ew*1-13q-0eool04fsfdsaniyt6k5f9gd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -140,4 +140,4 @@ import django_heroku
 
 django_heroku.settings(locals())
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
+# SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
