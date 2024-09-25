@@ -1,0 +1,32 @@
+{% extends "blogs/base.html" %}
+
+
+{% block title %}
+	<h3>{{ blog.blog }}</h3>
+{% endblock title %}
+
+{% block content %}
+	
+	<p>
+		<a href="{% url 'blogs:new_post' blog.id %}">Добавить новую запись</a>
+	</p>
+	
+	{% for i_text in text_blog %}
+		<div class="card mb-3">
+			<em class="card-header">
+				{{ i_text.date_added|date:'d M Y' }}
+				<small>
+					<a href="{% url 'blogs:edit_post' i_text.id %}">
+						Редактировать запись
+					</a>
+				</small>
+			</em>
+			<div class="card-body">
+				{{ i_text.text_blog|linebreaks }}
+			</div>
+		</div>
+	{% empty %}
+		<p>Записей пока нет</p>
+	{% endfor %}
+
+{% endblock content %}

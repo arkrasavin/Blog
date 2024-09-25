@@ -1,0 +1,54 @@
+{% extends 'blogs/base.html' %}
+
+
+{#{% block content %}#}
+{#	#}
+{#	<form method="post" action="{% url 'users:login' %}" class="form">#}
+{#		{% csrf_token %}#}
+{#		{% bootstrap_form form %}#}
+{#		{% buttons %}#}
+{#		<button name="submit" class="btn btn-primary">Вход</button>#}
+{#		<input type="hidden" name="next" value="{% url 'blogs:index' %}">#}
+{#	</form>#}
+{##}
+{#{% endblock content %}#}
+
+
+{% block content %}
+	
+	<form method="post" action="{% url 'users:login' %}" class="form">
+		{% csrf_token %}
+		
+		<div class="mb-3">
+			<label for="{{ form.username.id_for_label }}" class="form-label">
+				{{ form.username.label }}
+			</label>
+			{{ form.username }}
+			{% if form.username.errors %}
+				<div class="text-danger">
+					{{ form.username.errors }}
+				</div>
+			{% endif %}
+		</div>
+		
+		<div class="mb-3">
+			<label for="{{ form.password.id_for_label }}" class="form-label">
+				{{ form.password.label }}
+			</label>
+			{{ form.password }}
+			{% if form.password.errors %}
+				<div class="text-danger">
+					{{ form.password.errors }}
+				</div>
+			{% endif %}
+		</div>
+		
+		<div class="mb-3">
+			<button type="submit" class="btn btn-primary">
+				Вход
+			</button>
+			<input type="hidden" name="next" value="{% url 'blogs:index' %}">
+		</div>
+	</form>
+
+{% endblock content %}

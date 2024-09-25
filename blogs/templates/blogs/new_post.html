@@ -1,0 +1,30 @@
+{% extends 'blogs/base.html' %}
+
+
+{% block content %}
+	
+	<p>
+		<a href="{% url 'blogs:blog' blog.id %}">{{ blog }}</a>
+	</p>
+	
+	<p>Добавить комментарий:</p>
+	
+	<form action="{% url 'blogs:new_post' blog.id %}" method="post">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="{{ form.text_blog.id_for_label }}" class="form-label">
+				{{ form.text_blog.label }}
+			</label>
+			{{ form.text_blog }}
+			{% if form.text_blog.errors %}
+				<div class="text-danger">
+					{{ form.text_blog.errors }}
+				</div>
+			{% endif %}
+			<button name="submit" class="btn btn-primary">
+				Сохранить
+			</button>
+		</div>
+	</form>
+
+{% endblock content %}

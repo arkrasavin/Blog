@@ -1,0 +1,46 @@
+{% extends 'blogs/base.html' %}
+
+
+{% block content %}
+	
+	<h2 class="mb-4">
+		Регистрация
+	</h2>
+	
+	<form method="post" action="{% url 'users:register' %}">
+		{% csrf_token %}
+		{% for field in form %}
+			<div class="mb-3">
+				<label for="{{ field.id_form_label }}" class="form_label">
+					{{ field.label }}
+				</label>
+				{{ field }}
+				{% if field.errors %}
+					<div class="text-danger">
+						{% for error in field.errors %}
+							<small>
+								{{ error }}<br>
+							</small>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		{% endfor %}
+		
+		<button name="submit" class="btn btn-primary">
+			Зарегистрироваться
+		</button>
+		<input type="hidden" name="next" value="{% url 'blogs:index' %}">
+	</form>
+	
+	{% if form.non_field_errors %}
+		<div class="alert alert-danger mb-3">
+			{% for error in form.non_field_errors %}
+				<small>
+					{{ error }}
+				</small>
+			{% endfor %}
+		</div>
+	{% endif %}
+
+{% endblock %}

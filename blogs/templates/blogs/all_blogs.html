@@ -1,0 +1,27 @@
+{% extends 'blogs/base.html' %}
+
+
+{% block title %}
+	<h2>Темы</h2>
+{% endblock title %}
+
+{% block content %}
+	<ul>
+		{% for i_blog in all_blogs %}
+			<li>
+				<h4>
+					<a href="{% url 'blogs:blog' i_blog.id %}">{{ i_blog }}</a>
+				</h4>
+			</li>
+		{% empty %}
+			<h5>
+				Список тем блога пуст
+			</h5>
+		{% endfor %}
+	</ul>
+	
+	<h5>
+		<a href="{% url 'blogs:add_blog' %}">Добавить тему</a>
+	</h5>
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'blogs/base.html' %}
+
+
+{% block content %}
+	
+	<h4>
+		Введите название новой темы:
+	</h4>
+	
+	<form action="{% url 'blogs:add_blog' %}" method="post">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="{{ form.blog.id_for_label }}" class="form-label">
+				{{ form.blog.label }}
+			</label>
+			{{ form.blog }}
+			{% if form.blog.errors %}
+				<div class="text-danger">
+					{{ form.blog.errors }}
+				</div>
+			{% endif %}
+			<button name="submit" class="btn btn-primary">
+				Сохранить
+			</button>
+		</div>
+	</form>
+
+{% endblock content %}
