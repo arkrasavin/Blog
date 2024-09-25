@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$kei7l(xfs!qcj4o6ew*1-13q-0eool04fsfdsaniyt6k5f9gd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -139,3 +139,5 @@ LOGOUT_URL = 'users:logout'
 import django_heroku
 
 django_heroku.settings(locals())
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
