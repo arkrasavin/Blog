@@ -1,1 +1,1 @@
-web: gunicorn blog.wsgi --lig-file-
+web: gunicorn blog.wsgi
