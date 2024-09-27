@@ -13,6 +13,9 @@ import os
 from pathlib import Path
 
 import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$kei7l(xfs!qcj4o6ew*1-13q-0eool04fsfdsaniyt6k5f9gd'
+
+SECRET_KEY = os.environ.get('SECRET_KEY', 'DEFAULT_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', False) == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 # Application definition
 
@@ -86,7 +90,10 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3'),
+    'default':
+        dj_database_url.config(
+            default=os.environ.get('DATABASE_URL')
+        ),
 }
 
 # Password validation
@@ -133,11 +140,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Мои настройки
 LOGIN_URL = 'users:login'
-LOGOUT_URL = 'users:logout'
-
-# Настройки Heroku
-import django_heroku
-
-django_heroku.settings(locals())
-
-# SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
