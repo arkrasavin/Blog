@@ -14,5 +14,5 @@ password = os.environ.get('DJANGO_SUPERUSER_PASSWORD')
 if password is None:
     raise ValueError('Необходимо задать переменную окружения DJANGO_SUPERUSER_PASSWORD')
 
-if not User.objects.filter(username='admin').exsists():
+if not User.objects.filter(username='admin').exists():
     User.objects.create_superuser(username=username, email=email, password=password)
